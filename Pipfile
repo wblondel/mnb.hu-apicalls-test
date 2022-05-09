@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 zeep = "4.1"
-xmltodict = "0.12"
+xmltodict = "0.13.0"
 
 [dev-packages]
 
