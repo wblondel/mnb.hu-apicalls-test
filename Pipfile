@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-zeep = "4.1"
+zeep = "4.2.0"
 xmltodict = "0.13.0"
 
 [dev-packages]
