@@ -9,7 +9,7 @@ L'API est une API publique SOAP.
 
 ## Pré-requis
 
-- Python >3.9
+- Python ^3.8
 - [Poetry](https://python-poetry.org)
 
 ## Notes

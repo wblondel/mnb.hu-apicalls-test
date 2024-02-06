@@ -9,7 +9,7 @@ The API is a public SOAP API.
 
 ## Requirements
 
-- Python >3.9
+- Python ^3.8
 - [Poetry](https://python-poetry.org)
 
 ## Notes, how-tos

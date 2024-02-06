@@ -7,7 +7,7 @@ readme = "README.md"
 #package-mode = false (To add when Poetry 1.8 is released, https://github.com/python-poetry/poetry/pull/8650)
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.8"
 zeep = "^4.2.1"
 xmltodict = "^0.13.0"
 
