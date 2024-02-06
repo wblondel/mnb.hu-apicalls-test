@@ -1,33 +1,27 @@
 # mnb.hu-apicalls-test
 
-Translation: [FRENCH](README.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](../../../README.md)
+[![fr](https://img.shields.io/badge/lang-fr-blue.svg)](./README.md)
 
-Some test calls to the Hungarian central bank's API (Magyar Nemzeti Bank, "Hungarian National Bank").
+Quelques essais d'appels de l'API de la banque centrale hongroise (Magyar Nemzeti Bank, "Banque nationale hongroise").
 
-The API is a public SOAP API.
+L'API est une API publique SOAP.
 
-## Dependencies
+## Pré-requis
 
-- Python 3.9
-- zeep
-- xmltodict
+- Python >3.9
+- [Poetry](https://python-poetry.org)
 
-Move to the project directory and install the dependencies with [Pipenv](https://pipenv.pypa.io/en/stable/install/#pragmatic-installation-of-pipenv):
-```
-pipenv sync
-pipenv clean
-```
+## Notes
 
-## Notes, how-tos
+### Lister les opérations de l'API
 
-### List available operations from the API
-
-First, get an overview of all available operations and their call signatures:
+D'abord, je liste les opérations disponibles de l'API ainsi que leur signature:
 ```shell
 python -mzeep https://www.mnb.hu/arfolyamok.asmx?wsdl
 ```
 
-Response:
+Réponse:
 ```
 Service: MNBArfolyamServiceSoapImpl
      Port: CustomBinding_MNBArfolyamServiceSoap (Soap11Binding: {http://tempuri.org/}CustomBinding_MNBArfolyamServiceSoap)
@@ -40,21 +34,21 @@ Service: MNBArfolyamServiceSoapImpl
             GetInfo() -> GetInfoResult: xsd:string
 ```
 
-The `zeep` library use the first defined service by default. Some example calls:
+La librairie `zeep` utilise le premier service défini par défault. Quelques exemples d'appels :
 ```python
 result = client.service.GetCurrencies()
 result = client.service.GetInfo()
 result = client.service.GetCurrencyUnits('EUR')
 ```
 
-### Converting the returned data
-The `zeep` should convert the XML from the API into a dict but the API somehow returns an invalid/incomplete XML.
+### Conversion des données
+La librairie `zeep` se charge normalement de convertir la réponse XML de l'API en un dictionnaire Python, mais l'API a l'air de renvoyer un XML non valide.
 
-I use the `xmltodict` library manages to do it.
+J'utilise la librairie `xmltodict` pour effectuer cette tâche.
 
-I then structure the data the way I want in the `prepare_data()` function.
+Ensuite, je structure les données de la manière voulue dans la fonction `prepare_data()`.
 
-The data converted into JSON looks like this (extract only):
+Les données converties JSON ressemblent à ceci (extrait seulement) :
 ```json
 {
     "date": "2021-09-28",
@@ -79,7 +73,7 @@ The data converted into JSON looks like this (extract only):
 }
 ```
 
-This allows me to access the results this way:
+Cela me permet d'accéder aux résultats de cette manière :
 ```python
 print(final_dict["rates"]["AUD"])
 {'unit': '1', 'value': '223,72'}
@@ -90,11 +84,4 @@ print(final_dict["rates"]["JPY"])
 # 100 JPY = 276,48 HFU
 ```
 
-The data structure is of course modifiable.
-
-## An issue? A comment? An idea?
-
-You can contact me, create a ticket or a pull request.
-
-GitHub: https://github.com/wblondel <br/> Twitter:
-http://twitter.com/wgblondel <br/> Email: contact@williamblondel.fr
+La structure des données est bien sûr modifiable.
